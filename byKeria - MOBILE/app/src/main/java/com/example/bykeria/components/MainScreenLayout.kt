@@ -61,6 +61,13 @@ fun MainScreenLayout(navController: NavController, content: @Composable (Padding
                         }) {
                             Text("Sobre")
                         }
+                        DropdownMenuItem(onClick = {
+                            expanded = false
+                            navController.navigate("FAQ")
+                        }) {
+                            Text("FAQ")
+                        }
+
                         DropdownMenuItem(onClick = { (navController.context as? ComponentActivity)?.finish() }) {
                             Text("Sair")
                         }

@@ -1,22 +1,17 @@
 package com.example.bykeria
 
 import android.os.Bundle
-import android.window.SplashScreen
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.material.*
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.MoreVert
 import androidx.compose.runtime.*
-import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.example.bykeria.components.MainScreenLayout
-import com.example.bykeria.pages.BikeDatailsScreen
+import com.example.bykeria.components.bikesList
+import com.example.bykeria.pages.BikeDetailsScreen
+import com.example.bykeria.pages.FAQ
 import com.example.bykeria.pages.HomeScreen
 import com.example.bykeria.pages.SettingsScreen
 import com.example.bykeria.pages.SplashScreen
@@ -44,9 +39,22 @@ fun MyApp() {
                 HomeScreen(navController, paddingValues)
             }
         }
-        composable("sobre") {
+        composable("detalhes") {
+            // Agora passando a lista bikesList corretamente
             MainScreenLayout(navController) { paddingValues ->
-                BikeDatailsScreen(navController, paddingValues)
+                BikeDetailsScreen(
+                    navController = navController,
+                    paddingValues = paddingValues,
+                    bikes = bikesList, // Passando a lista de bicicletas real
+                    onBikeSelected = { selectedBike ->
+                        // Ação ao selecionar uma bicicleta
+                        println("Bicicleta selecionada: ${selectedBike.modelo}")
+                    },
+                    onFavoriteToggle = { toggledBike ->
+                        // Ação ao alternar o favorito
+                        println("Favorito alternado: ${toggledBike.modelo}")
+                    }
+                )
             }
         }
         composable("settings") {
@@ -54,9 +62,14 @@ fun MyApp() {
                 SettingsScreen(navController, paddingValues)
             }
         }
-
+        composable("FAQ") {
+            MainScreenLayout(navController) { paddingValues ->
+                FAQ(navController, paddingValues)
+            }
+        }
     }
 }
+
 
 
 
@@ -68,5 +81,4 @@ fun MyApp() {
 fun DefaultPreview() {
     MyApp()
 }
-
 
