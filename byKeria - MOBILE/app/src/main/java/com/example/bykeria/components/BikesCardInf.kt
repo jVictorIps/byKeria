@@ -11,16 +11,14 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
-import androidx.navigation.NavController
 
 
 @Composable
-fun BikesListItem(
-    bike: Bike,
-                  onBikeSelected: (Bike) -> Unit,
-                  onFavoriteToggle: (Bike) -> Unit
+fun BikesInfListItem(
+    bike: BikeInf,
+    onBikeSelected: (BikeInf) -> Unit,
+    onFavoriteToggle: (BikeInf) -> Unit
 ) {
     Card(
         modifier = Modifier
@@ -80,7 +78,7 @@ fun BikesListItem(
                 }
             }
 
-           Spacer(modifier = Modifier.height(16.dp))
+            Spacer(modifier = Modifier.height(16.dp))
 
             // Botão "Ver mais"
             Button(

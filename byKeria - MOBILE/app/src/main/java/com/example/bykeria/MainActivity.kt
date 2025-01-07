@@ -9,8 +9,10 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.example.bykeria.components.MainScreenLayout
-import com.example.bykeria.components.bikesList
-import com.example.bykeria.pages.BikeDetailsScreen
+import com.example.bykeria.components.bikesAduList
+import com.example.bykeria.components.bikesInfList
+import com.example.bykeria.pages.BikeAduDetailsScreen
+import com.example.bykeria.pages.BikeInfDetailsScreen
 import com.example.bykeria.pages.FAQ
 import com.example.bykeria.pages.HomeScreen
 import com.example.bykeria.pages.SettingsScreen
@@ -39,13 +41,32 @@ fun MyApp() {
                 HomeScreen(navController, paddingValues)
             }
         }
-        composable("detalhes") {
+        composable("detalhesadu") {
             // Agora passando a lista bikesList corretamente
             MainScreenLayout(navController) { paddingValues ->
-                BikeDetailsScreen(
+                BikeAduDetailsScreen(
                     navController = navController,
                     paddingValues = paddingValues,
-                    bikes = bikesList, // Passando a lista de bicicletas real
+                    bikes = bikesAduList, // Passando a lista de bicicletas real
+                    onBikeSelected = { selectedBike ->
+                        // Ação ao selecionar uma bicicleta
+                        println("Bicicleta selecionada: ${selectedBike.modelo}")
+                    },
+                    onFavoriteToggle = { toggledBike ->
+                        // Ação ao alternar o favorito
+                        println("Favorito alternado: ${toggledBike.modelo}")
+                    }
+                )
+            }
+        }
+
+        composable("detalhesinf") {
+            // Agora passando a lista bikesList corretamente
+            MainScreenLayout(navController) { paddingValues ->
+                BikeInfDetailsScreen(
+                    navController = navController,
+                    paddingValues = paddingValues,
+                    bikes = bikesInfList, // Passando a lista de bicicletas real
                     onBikeSelected = { selectedBike ->
                         // Ação ao selecionar uma bicicleta
                         println("Bicicleta selecionada: ${selectedBike.modelo}")

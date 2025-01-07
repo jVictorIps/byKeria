@@ -8,16 +8,16 @@ import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.navigation.NavController
-import com.example.bykeria.components.Bike
-import com.example.bykeria.components.BikesListItem
+import com.example.bykeria.components.BikeAdu
+import com.example.bykeria.components.BikesAduListItem
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun BikeDetailsScreen(
+fun BikeAduDetailsScreen(
     navController: NavController, paddingValues: PaddingValues,
-    bikes: List<Bike>, // Lista de bicicletas
-    onBikeSelected: (Bike) -> Unit, // Callback para selecionar uma bicicleta
-    onFavoriteToggle: (Bike) -> Unit // Callback para favoritar/desfavoritar
+    bikes: List<BikeAdu>, // Lista de bicicletas
+    onBikeSelected: (BikeAdu) -> Unit, // Callback para selecionar uma bicicleta
+    onFavoriteToggle: (BikeAdu) -> Unit // Callback para favoritar/desfavoritar
 ) {
     Scaffold(
         topBar = {
@@ -41,7 +41,7 @@ fun BikeDetailsScreen(
                     .padding(innerPadding)
             ) {
                 items(bikes) { bike ->
-                    BikesListItem(
+                    BikesAduListItem(
                         bike = bike,
                         onBikeSelected = onBikeSelected,
                         onFavoriteToggle = onFavoriteToggle // Aqui não precisa de paddingValues

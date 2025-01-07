@@ -68,7 +68,7 @@ fun HomeScreen(navController: NavController, paddingValues: PaddingValues) {
                     .size(200.dp) // Define o tamanho da imagem
                      // Adiciona cantos arredondados
                     .clickable {
-                        navController.navigate("detalhes") // Navegação
+                        navController.navigate("detalhesadu") // Navegação
                     }
             )
 
@@ -85,7 +85,7 @@ fun HomeScreen(navController: NavController, paddingValues: PaddingValues) {
                     .size(200.dp) // Define o tamanho da imagem
                     .clip(RoundedCornerShape(16.dp)) // Adiciona cantos arredondados
                     .clickable {
-                        navController.navigate("sobre") // Navegação
+                        navController.navigate("detalhesinf") // Navegação
                     }
             )
 
