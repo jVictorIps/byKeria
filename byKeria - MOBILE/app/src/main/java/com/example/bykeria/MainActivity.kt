@@ -17,6 +17,7 @@ import com.example.bykeria.pages.FAQ
 import com.example.bykeria.pages.HomeScreen
 import com.example.bykeria.pages.SettingsScreen
 import com.example.bykeria.pages.SplashScreen
+import com.example.bykeria.ui.theme.ByKeriaTheme
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -30,76 +31,72 @@ class MainActivity : ComponentActivity() {
 @Composable
 fun MyApp() {
     val navController = rememberNavController()
+    var isDarkTheme by remember { mutableStateOf(false) } // Controle do tema
 
-    NavHost(
-        navController = navController,
-        startDestination = "splash"
-    ) {
-        composable("splash") { SplashScreen(navController) }
-        composable("main") {
-            MainScreenLayout(navController) { paddingValues ->
-                HomeScreen(navController, paddingValues)
+    ByKeriaTheme(darkTheme = isDarkTheme) { // Utilize o tema definido
+        NavHost(
+            navController = navController,
+            startDestination = "splash"
+        ) {
+            composable("splash") { SplashScreen(navController) }
+            composable("main") {
+                MainScreenLayout(navController) { paddingValues ->
+                    HomeScreen(navController, paddingValues)
+                }
             }
-        }
-        composable("detalhesadu") {
-            // Agora passando a lista bikesList corretamente
-            MainScreenLayout(navController) { paddingValues ->
-                BikeAduDetailsScreen(
-                    navController = navController,
-                    paddingValues = paddingValues,
-                    bikes = bikesAduList, // Passando a lista de bicicletas real
-                    onBikeSelected = { selectedBike ->
-                        // Ação ao selecionar uma bicicleta
-                        println("Bicicleta selecionada: ${selectedBike.modelo}")
-                    },
-                    onFavoriteToggle = { toggledBike ->
-                        // Ação ao alternar o favorito
-                        println("Favorito alternado: ${toggledBike.modelo}")
-                    }
-                )
+            composable("detalhesadu") {
+                MainScreenLayout(navController) { paddingValues ->
+                    BikeAduDetailsScreen(
+                        navController = navController,
+                        paddingValues = paddingValues,
+                        bikes = bikesAduList,
+                        onBikeSelected = { selectedBike ->
+                            println("Bicicleta selecionada: ${selectedBike.modelo}")
+                        },
+                        onFavoriteToggle = { toggledBike ->
+                            println("Favorito alternado: ${toggledBike.modelo}")
+                        }
+                    )
+                }
             }
-        }
 
-        composable("detalhesinf") {
-            // Agora passando a lista bikesList corretamente
-            MainScreenLayout(navController) { paddingValues ->
-                BikeInfDetailsScreen(
-                    navController = navController,
-                    paddingValues = paddingValues,
-                    bikes = bikesInfList, // Passando a lista de bicicletas real
-                    onBikeSelected = { selectedBike ->
-                        // Ação ao selecionar uma bicicleta
-                        println("Bicicleta selecionada: ${selectedBike.modelo}")
-                    },
-                    onFavoriteToggle = { toggledBike ->
-                        // Ação ao alternar o favorito
-                        println("Favorito alternado: ${toggledBike.modelo}")
-                    }
-                )
+            composable("detalhesinf") {
+                MainScreenLayout(navController) { paddingValues ->
+                    BikeInfDetailsScreen(
+                        navController = navController,
+                        paddingValues = paddingValues,
+                        bikes = bikesInfList,
+                        onBikeSelected = { selectedBike ->
+                            println("Bicicleta selecionada: ${selectedBike.modelo}")
+                        },
+                        onFavoriteToggle = { toggledBike ->
+                            println("Favorito alternado: ${toggledBike.modelo}")
+                        }
+                    )
+                }
             }
-        }
-        composable("settings") {
-            MainScreenLayout(navController) { paddingValues ->
-                SettingsScreen(navController, paddingValues)
+            composable("settings") {
+                MainScreenLayout(navController) { paddingValues ->
+                    SettingsScreen(
+                        navController = navController,
+                        paddingValues = paddingValues,
+                        isDarkTheme = isDarkTheme, // Estado do tema
+                        onToggleTheme = { isDarkTheme = !isDarkTheme } // Alterna o tema
+                    )
+                }
             }
-        }
-        composable("FAQ") {
-            MainScreenLayout(navController) { paddingValues ->
-                FAQ(navController, paddingValues)
+
+            composable("FAQ") {
+                MainScreenLayout(navController) { paddingValues ->
+                    FAQ(navController, paddingValues)
+                }
             }
         }
     }
 }
-
-
-
-
-
-
 
 @Preview(showBackground = true)
 @Composable
 fun DefaultPreview() {
     MyApp()
 }
-

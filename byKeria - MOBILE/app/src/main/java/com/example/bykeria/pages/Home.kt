@@ -1,6 +1,5 @@
 package com.example.bykeria.pages
 
-import androidx.activity.ComponentActivity
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -12,26 +11,13 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.BottomNavigation
-import androidx.compose.material.BottomNavigationItem
-import androidx.compose.material.DropdownMenu
-import androidx.compose.material.DropdownMenuItem
-import androidx.compose.material.Icon
-import androidx.compose.material.IconButton
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Scaffold
-import androidx.compose.material.Text
-import androidx.compose.material.TopAppBar
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.MoreVert
+import androidx.compose.material3.Card
+import androidx.compose.material3.CardDefaults
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextAlign
@@ -44,56 +30,65 @@ fun HomeScreen(navController: NavController, paddingValues: PaddingValues) {
     Box(
         modifier = Modifier
             .fillMaxSize()
-            .background(Color.White),
+            .background(MaterialTheme.colorScheme.background), // Usando a cor do tema
         contentAlignment = Alignment.Center
     ) {
         Column(
             modifier = Modifier
                 .fillMaxSize()
-                .padding(16.dp), // Padding externo da coluna
-            verticalArrangement = Arrangement.spacedBy(16.dp), // Espaçamento vertical entre os itens
-            horizontalAlignment = Alignment.CenterHorizontally // Centraliza horizontalmente
+                .padding(paddingValues),
+            verticalArrangement = Arrangement.spacedBy(16.dp),
+            horizontalAlignment = Alignment.CenterHorizontally
         ) {
             Text(
                 text = "Dê uma olhada nas nossas Bikes!",
-                style = MaterialTheme.typography.h6,
-                textAlign = TextAlign.Center // Alinha o texto ao centro
-            )
-
-            // Imagem clicável para adultos
-            Image(
-                painter = painterResource(id = R.drawable.bikesadul), // Substitua pelo seu arquivo
-                contentDescription = "Bikes para adultos",
-                modifier = Modifier
-                    .size(200.dp) // Define o tamanho da imagem
-                     // Adiciona cantos arredondados
-                    .clickable {
-                        navController.navigate("detalhesadu") // Navegação
-                    }
-            )
-
-            Text(
-                text = "Bikes para adultos",
+                style = MaterialTheme.typography.headlineMedium,
                 textAlign = TextAlign.Center
             )
 
-            // Imagem clicável para crianças
-            Image(
-                painter = painterResource(id = R.drawable.bikeskid), // Substitua pelo seu arquivo
-                contentDescription = "Bikes para crianças",
+            // Card para bikes para adultos
+            Card(
                 modifier = Modifier
-                    .size(200.dp) // Define o tamanho da imagem
-                    .clip(RoundedCornerShape(16.dp)) // Adiciona cantos arredondados
+                    .size(200.dp)
                     .clickable {
-                        navController.navigate("detalhesinf") // Navegação
-                    }
+                        navController.navigate("detalhesadu") // Navegação para "detalhesadu"
+                    },
+                shape = RoundedCornerShape(16.dp),
+                elevation = CardDefaults.elevatedCardElevation(defaultElevation = 4.dp) // Usando CardDefaults para definir a elevação
+            ) {
+                Image(
+                    painter = painterResource(id = R.drawable.bikesadul), // Imagem da bike para adultos
+                    contentDescription = "Bikes para adultos",
+                    modifier = Modifier.fillMaxSize()
+                )
+            }
+            Text(
+                text = "Bikes para adultos",
+                style = MaterialTheme.typography.bodyMedium,
+                textAlign = TextAlign.Center
             )
 
+            // Card para bikes para crianças
+            Card(
+                modifier = Modifier
+                    .size(200.dp)
+                    .clickable {
+                        navController.navigate("detalhesinf") // Navegação para "detalhesinf"
+                    },
+                shape = RoundedCornerShape(16.dp),
+                elevation = CardDefaults.elevatedCardElevation(defaultElevation = 4.dp) // Usando CardDefaults para definir a elevação
+            ) {
+                Image(
+                    painter = painterResource(id = R.drawable.bikeskid), // Imagem da bike para crianças
+                    contentDescription = "Bikes para crianças",
+                    modifier = Modifier.fillMaxSize()
+                )
+            }
             Text(
                 text = "Bikes para crianças",
+                style = MaterialTheme.typography.bodyMedium,
                 textAlign = TextAlign.Center
             )
         }
     }
 }
-

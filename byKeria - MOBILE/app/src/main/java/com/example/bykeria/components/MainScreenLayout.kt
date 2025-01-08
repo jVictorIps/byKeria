@@ -15,6 +15,8 @@ import androidx.compose.material.Text
 import androidx.compose.material.TopAppBar
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.MoreVert
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -36,13 +38,14 @@ fun MainScreenLayout(navController: NavController, content: @Composable (Padding
         topBar = {
             TopAppBar(
                 title = { Text("byKeria") },
-                backgroundColor = Color(0xFFF1F130),
+                backgroundColor = MaterialTheme.colorScheme.primary, // Cor de fundo da barra
+                contentColor = MaterialTheme.colorScheme.onPrimary, // Cor do texto/ícone
                 actions = {
                     IconButton(onClick = { expanded = true }) {
                         Icon(
-                            Icons.Default.MoreVert,
+                            imageVector = Icons.Default.MoreVert,
                             contentDescription = "Menu",
-                            tint = Color.Black
+                            tint = MaterialTheme.colorScheme.onPrimary // Cor do ícone
                         )
                     }
                     DropdownMenu(
@@ -68,7 +71,9 @@ fun MainScreenLayout(navController: NavController, content: @Composable (Padding
                             Text("FAQ")
                         }
 
-                        DropdownMenuItem(onClick = { (navController.context as? ComponentActivity)?.finish() }) {
+                        DropdownMenuItem(onClick = {
+                            (navController.context as? ComponentActivity)?.finish()
+                        }) {
                             Text("Sair")
                         }
                     }
@@ -77,11 +82,9 @@ fun MainScreenLayout(navController: NavController, content: @Composable (Padding
         },
         bottomBar = {
             BottomNavigation(
-                backgroundColor = Color(0xFFF1F130),
-                contentColor = Color.White
+                backgroundColor = MaterialTheme.colorScheme.primary,
+                contentColor = MaterialTheme.colorScheme.onPrimary
             ) {
-
-
                 BottomNavigationItem(
                     selected = selectedItem == 1,
                     onClick = {
@@ -95,15 +98,15 @@ fun MainScreenLayout(navController: NavController, content: @Composable (Padding
                             modifier = Modifier.size(24.dp)
                         )
                     },
-                    selectedContentColor = Color.Black,
-                    unselectedContentColor = Color.Black
+                    selectedContentColor = MaterialTheme.colorScheme.secondary,
+                    unselectedContentColor = MaterialTheme.colorScheme.onSurfaceVariant
                 )
 
                 BottomNavigationItem(
                     selected = selectedItem == 0,
                     onClick = {
                         selectedItem = 0
-                        navController.navigate("main") // Corrigido para "main"
+                        navController.navigate("main")
                     },
                     icon = {
                         Icon(
@@ -112,8 +115,8 @@ fun MainScreenLayout(navController: NavController, content: @Composable (Padding
                             modifier = Modifier.size(24.dp)
                         )
                     },
-                    selectedContentColor = Color.Black,
-                    unselectedContentColor = Color.Black
+                    selectedContentColor = MaterialTheme.colorScheme.secondary,
+                    unselectedContentColor = MaterialTheme.colorScheme.onSurfaceVariant
                 )
 
                 BottomNavigationItem(
@@ -129,12 +132,11 @@ fun MainScreenLayout(navController: NavController, content: @Composable (Padding
                             modifier = Modifier.size(24.dp)
                         )
                     },
-                    selectedContentColor = Color.Black,
-                    unselectedContentColor = Color.Black
+                    selectedContentColor = MaterialTheme.colorScheme.secondary,
+                    unselectedContentColor = MaterialTheme.colorScheme.onSurfaceVariant
                 )
             }
         },
         content = { paddingValues -> content(paddingValues) } // Usa o conteúdo passado como parâmetro
     )
 }
-
