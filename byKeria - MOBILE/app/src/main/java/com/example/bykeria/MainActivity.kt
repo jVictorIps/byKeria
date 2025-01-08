@@ -91,6 +91,8 @@ fun MyApp() {
                     FAQ(navController, paddingValues)
                 }
             }
+
+
         }
     }
 }
