@@ -26,11 +26,11 @@ fun SplashScreen(navController: NavController) {
 
     // Exibindo o logo por 2 segundos e depois ativando o fadeOut
     LaunchedEffect(Unit) {
-        delay(2000)  // Tempo de exibição da splash (2 segundos)
+        delay(2000) 
         fadeOut = true
         delay(500)   // Tempo de animação de fadeOut
         navController.navigate("main") {
-            popUpTo("splash") { inclusive = true } // Garantir que a tela de splash não fique na pilha
+            popUpTo("splash") { inclusive = true } 
         }
     }
 
@@ -53,13 +53,13 @@ fun SplashScreen(navController: NavController) {
             ) {
                 // Logo
                 Image(
-                    painter = painterResource(id = R.drawable.logoo), // Substitua pelo seu arquivo de logo
+                    painter = painterResource(id = R.drawable.logoo), 
                     contentDescription = "Logo",
                     modifier = Modifier.size(200.dp) // Tamanho da logo
                 )
 
-                // Texto abaixo da logo
-                Spacer(modifier = Modifier.height(16.dp)) // Espaço entre a logo e o texto
+                
+                Spacer(modifier = Modifier.height(16.dp)) 
                 Text(
                     text = "byKeria", // Texto desejado
                     style = TextStyle(
